@@ -11,3 +11,10 @@ module "security-group" {
 module "keypair" {
   source = "./module/keypair"
 }
+
+module "instance" {
+  source = "./module/instance"
+  subnet-id = module.vpc.public-subnet-id
+  security-group = module.security-group.security-group-id
+  key-name = module.keypair.orinial-key
+}
