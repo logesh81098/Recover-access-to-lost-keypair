@@ -5,7 +5,7 @@ resource "aws_instance" "Windows-instance" {
   ami = var.windows-ami-id
   instance_type = var.instance-type
   subnet_id = var.subnet-id
-  security_groups = [var.security-group]
+  vpc_security_group_ids = [var.security-group]
   key_name = var.key-name
   associate_public_ip_address = true
   tags = {
@@ -34,10 +34,7 @@ resource "aws_volume_attachment" "secondary-windows-volume-attachment" {
         #Volume ID (we can directly use aws_ebs_snapshot to take snapshot just by providing volume ID)
         # Instance ID (Using "Data" function we can get the volume ID by mentioning the Instance ID)
 #So Now we go with Volume ID
-resource "aws_ebs_snapshot" "windows-root-volume-snapshot" {
-  volume_id = var.windows-root-volume
-}
-      
+
 
 
 #######################################################################################################################################
@@ -47,7 +44,7 @@ resource "aws_instance" "Linux-server" {
   ami = var.linux-ami-id
   instance_type = var.instance-type
   subnet_id = var.subnet-id
-  security_groups = [var.security-group]
+  vpc_security_group_ids = [var.security-group]
   key_name = var.key-name
   associate_public_ip_address = true
   tags = {
@@ -64,8 +61,4 @@ resource "aws_volume_attachment" "linux-secondary-volume-attachment" {
   volume_id = aws_ebs_volume.linux-secondary-volume.id
   instance_id = aws_instance.Linux-server.id
   device_name = "/dev/sdh"
-}
-
-resource "aws_ebs_snapshot" "linux-root-volume-snapshot" {
-  volume_id = var.windows-root-volume
 }
