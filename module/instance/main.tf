@@ -27,6 +27,18 @@ resource "aws_volume_attachment" "secondary-windows-volume-attachment" {
   device_name = "/dev/sdh"
 }
 
+###########################################################################################################################
+#                                Taking snapshot of volume and creating new volume from that snapshot             
+############################################################################################################################
+# To take snapshot of root volume first we need to know either anyone of the below:
+        #Volume ID (we can directly use aws_ebs_snapshot to take snapshot just by providing volume ID)
+        # Instance ID (Using "Data" function we can get the volume ID by mentioning the Instance ID)
+#So Now we go with Volume ID
+resource "aws_ebs_snapshot" "windows-root-volume-snapshot" {
+  volume_id = var.windows-root-volume
+}
+      
+
 
 #######################################################################################################################################
 #                                            Deploying Linux EC2 instance
@@ -54,3 +66,6 @@ resource "aws_volume_attachment" "linux-secondary-volume-attachment" {
   device_name = "/dev/sdh"
 }
 
+resource "aws_ebs_snapshot" "linux-root-volume-snapshot" {
+  volume_id = var.linux-root-volume
+}

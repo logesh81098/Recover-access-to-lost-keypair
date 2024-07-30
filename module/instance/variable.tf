@@ -25,3 +25,11 @@ variable "linux-ami-id" {
 variable "az1" {
   default = "eu-west-2a"
 }
+
+variable "windows-root-volume" {
+  default = "vol-092371f9980bd229b"
+}
+
+variable "linux-root-volume" {
+  default = "vol-0636ac17a9d786c12"
+}
