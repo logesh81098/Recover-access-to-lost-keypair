@@ -21,3 +21,7 @@ variable "key-name" {
 variable "linux-ami-id" {
   default = "ami-046d5130831576bbb"
 }
+
+variable "az1" {
+  default = "eu-west-2a"
+}

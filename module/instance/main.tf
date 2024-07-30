@@ -13,6 +13,20 @@ resource "aws_instance" "Windows-instance" {
   }
 }
 
+resource "aws_ebs_volume" "windows-secondary-volume" {
+  size = 10
+  availability_zone = var.az1
+  tags = {
+    Name = "Secondary Windows Volume"
+  }
+}
+
+resource "aws_volume_attachment" "secondary-windows-volume-attachment" {
+  volume_id = aws_ebs_volume.windows-secondary-volume.id
+  instance_id = aws_instance.Windows-instance.id
+  device_name = "/dev/sdh"
+}
+
 
 #######################################################################################################################################
 #                                            Deploying Linux EC2 instance
@@ -28,3 +42,15 @@ resource "aws_instance" "Linux-server" {
     Name =  "Linux Server"
   }
 }
+
+resource "aws_ebs_volume" "linux-secondary-volume" {
+  size = 10
+  availability_zone = var.az1
+  }
+
+resource "aws_volume_attachment" "linux-secondary-volume-attachment" {
+  volume_id = aws_ebs_volume.linux-secondary-volume.id
+  instance_id = aws_instance.Linux-server.id
+  device_name = "/dev/sdh"
+}
+
