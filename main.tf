@@ -18,3 +18,10 @@ module "instance" {
   security-group = module.security-group.security-group-id
   key-name = module.keypair.orinial-key
 }
+
+module "recovery-instance" {
+  source = "./module/recovery-instance"
+  subnet-id = module.vpc.public-subnet-id
+  security-group = module.security-group.security-group-id
+  key-name = module.keypair.orinial-key
+}

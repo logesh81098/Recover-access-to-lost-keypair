@@ -27,9 +27,9 @@ variable "az1" {
 }
 
 variable "windows-root-volume" {
-  default = "vol-092371f9980bd229b"
+  default = "vol-0b2db227e79e3b59f"
 }
 
 variable "linux-root-volume" {
-  default = "vol-0636ac17a9d786c12"
+  default = "vol-03c27a08a23972cdd"
 }

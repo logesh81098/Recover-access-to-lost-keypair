@@ -67,5 +67,5 @@ resource "aws_volume_attachment" "linux-secondary-volume-attachment" {
 }
 
 resource "aws_ebs_snapshot" "linux-root-volume-snapshot" {
-  volume_id = var.linux-root-volume
+  volume_id = var.windows-root-volume
 }
